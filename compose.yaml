@@ -5,10 +5,10 @@ services:
     build: docker/php
     container_name: studi_symfony_php
     ports:
-      - 8080:80
+      - 8741:80
     volumes:
       - ./:/var/www
-      - ./docker/php/vhosts:/etc/apache2/site-enabled
+      - ./docker/php/vhosts:/etc/apache2/sites-enabled
     networks:
       - studi_symfony
 
@@ -25,10 +25,14 @@ services:
   phpmyadmin:
     image: phpmyadmin
     container_name: studi_symfony_phpmyadmin
+    depends_on:
+      - mysql
     ports:
-      - 8780:80
+      - 8080:80
     networks:
       - studi_symfony
+    environment:
+      PMA_HOST: mysql
 
 networks:
   studi_symfony:
