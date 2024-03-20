@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  www:
+    build: docker/php
+    container_name: studi_symfony_php
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www
+      - ./docker/php/vhosts:/etc/apache2/site-enabled
+    networks:
+      - studi_symfony
+
+  mysql:
+    image: mysql
+    container_name: studi_symfony_mysql
+    volumes:
+      - ./var/db_data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    networks:
+      - studi_symfony
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: studi_symfony_phpmyadmin
+    ports:
+      - 8780:80
+    networks:
+      - studi_symfony
+
+networks:
+  studi_symfony:
