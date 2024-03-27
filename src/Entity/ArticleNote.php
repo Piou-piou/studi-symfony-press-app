@@ -18,7 +18,7 @@ class ArticleNote
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
     #[ORM\JoinColumn(nullable: false)]
-    private Article $Article;
+    private Article $article;
 
     #[ORM\ManyToOne(inversedBy: 'articleNotes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -43,12 +43,12 @@ class ArticleNote
 
     public function getArticle(): ?Article
     {
-        return $this->Article;
+        return $this->article;
     }
 
-    public function setArticle(?Article $Article): static
+    public function setArticle(?Article $article): static
     {
-        $this->Article = $Article;
+        $this->article = $article;
 
         return $this;
     }

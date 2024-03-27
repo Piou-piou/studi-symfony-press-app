@@ -34,7 +34,7 @@ class Article
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'article')]
     private Collection $comments;
 
-    #[ORM\OneToMany(targetEntity: ArticleNote::class, mappedBy: 'note', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ArticleNote::class, mappedBy: 'article', orphanRemoval: true)]
     private Collection $notes;
 
     #[ORM\ManyToOne(inversedBy: 'Article')]
