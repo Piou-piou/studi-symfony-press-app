@@ -58,7 +58,8 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/edit.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'is_create' => $isCreate,
         ]);
     }
 
