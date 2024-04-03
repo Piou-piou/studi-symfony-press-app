@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <article>
+        <h2>{{  article.title }}</h2>
+        <h3>{{ article.category }}</h3>
+
+        {{ article.content }}
+
+        {% if article.publishedAt %}
+            <p>Article publié le {{ article.publishedAt }}</p>
+        {% else %}
+            <p>{{ article.status }}</p>
+        {% endif %}
+    </article>
+{% endblock %}

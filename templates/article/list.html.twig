@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des articles</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.status }}</td>
+                    <td>
+                        <a href="{{ path('articles_show', {'id': article.id}) }}">Show</a>
+                        <a href="{{ path('articles_edit', {'id': article.id}) }}">Editer</a>
+                        <a href="{{ path('articles_delete', {'id': article.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun article trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
