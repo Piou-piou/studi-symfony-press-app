@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form with [
+    'form/template.html.twig'
+] %}
+
 {% block body %}
     <h2>{{ is_create ? 'Ajouter un article' : 'Modifier cet article' }}</h2>
 
