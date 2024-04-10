@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 #[Route('/articles', name: 'articles_')]
 class ArticleController extends AbstractController
@@ -26,12 +27,14 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show')]
-    public function show(Article $article = null)
+    public function show(RouterInterface $router, Article $article = null)
     {
         $comment = new Comment();
         $comment->setArticle($article);
 
-        $form = $this->createForm(CommentType::class, $comment);
+        $form = $this->createForm(CommentType::class, $comment, [
+            'action' => $router->generate('comments_create', ['article' => $article->getId()])
+        ]);
 
         return $this->render('article/show.html.twig', [
             'article' => $article,

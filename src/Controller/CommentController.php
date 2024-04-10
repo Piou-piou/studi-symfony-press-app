@@ -24,7 +24,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Article $comment */
             $comment = $form->getData();
-            $comment->setStatus('DRAFT');
+            $comment->setPublishedAt(new \DateTimeImmutable());
 
             $em->persist($comment);
             $em->flush();
@@ -32,6 +32,6 @@ class CommentController extends AbstractController
             $this->addFlash('success', 'L\'article a été ajouté');
         }
 
-        return $this->redirectToRoute('articles_show', ['id' => $article]);
+        return $this->redirectToRoute('articles_show', ['id' => $article->getId()]);
     }
 }

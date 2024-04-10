@@ -15,7 +15,11 @@
     </article>
 
     <div>
-        <!-- Affichage des commentaires -->
+        {% for comment in article.comments  %}
+            <p>{{ comment.comment }}</p>
+        {% else %}
+            <p>Auncun commentaire</p>
+        {% endfor %}
 
         {{ form(form) }}
     </div>
