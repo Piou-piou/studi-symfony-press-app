@@ -38,6 +38,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->articleNotes = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->username;
+    }
+
     public function getId(): int
     {
         return $this->id;

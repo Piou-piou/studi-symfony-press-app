@@ -22,9 +22,10 @@ class CommentController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Article $comment */
+            /** @var Comment $comment */
             $comment = $form->getData();
             $comment->setPublishedAt(new \DateTimeImmutable());
+            $comment->setUser($this->getUser());
 
             $em->persist($comment);
             $em->flush();

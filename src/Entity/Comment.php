@@ -22,6 +22,10 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private Article $article;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private User $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +63,18 @@ class Comment
     public function setArticle(Article $article): static
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

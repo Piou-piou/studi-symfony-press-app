@@ -32,13 +32,13 @@
                     <p>{{ comment.comment }}</p>
                 </div>
                 <div class="card-footer">
-                    Publié à {{ comment.publishedAt|date('d/m/Y H:i') }}
+                    Publié par {{ comment.user.username }} à {{ comment.publishedAt|date('d/m/Y H:i') }}
                 </div>
             </div>
         {% else %}
             <div class="card">
                 <div class="card-body">
-                    <p>{{ comment.comment }}</p>
+                    <p>Aucun commentaire</p>
                 </div>
             </div>
         {% endfor %}
