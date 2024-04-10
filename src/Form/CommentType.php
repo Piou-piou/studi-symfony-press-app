@@ -21,8 +21,8 @@ class CommentType extends AbstractType
             ->add('comment', TextareaType::class)
             ->add('article', EntityType::class, [
                 'class' => Article::class,
-                'attr' => [
-                    'class' => 'hiddent'
+                'row_attr' => [
+                    'class' => 'hidden'
                 ]
             ])
             ->add('submit', SubmitType::class);
