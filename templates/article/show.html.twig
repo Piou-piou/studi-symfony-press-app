@@ -24,6 +24,11 @@
         </div>
     </article>
 
+    <a href="{{ path('comments_create', {'article': article.id}) }}" data-turbo-frame="comment">
+        Ajouter un commentaire
+    </a>
+    <turbo-frame id="comment"></turbo-frame>
+
     <div class="mt-3">
         <h3>Commentaires</h3>
         {% for comment in article.comments  %}
@@ -43,6 +48,6 @@
             </div>
         {% endfor %}
 
-        {{ form(form) }}
+        {#{{ form(form) }}#}
     </div>
 {% endblock %}

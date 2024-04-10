@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <turbo-frame id="comment" target="_top">
+        {% form_theme form with [
+            'form/template.html.twig'
+        ] %}
+
+        <h2>Ajouter un commentaire</h2>
+
+        {{ form(form) }}
+    </turbo-frame>
+{% endblock %}
