@@ -1,13 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form with [
+    'form/template.html.twig'
+] %}
+
 {% block body %}
-    <turbo-frame id="comment" target="_top">
-        {% form_theme form with [
-            'form/template.html.twig'
-        ] %}
+    <turbo-frame id="main-modal" target="_top">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un commentaire</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-        <h2>Ajouter un commentaire</h2>
+                {{ form_start(form) }}
 
-        {{ form(form) }}
+                <div class="modal-body">
+                    {{ form_row(form.comment) }}
+                    {{ form_row(form.article) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ form_rest(form) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
     </turbo-frame>
 {% endblock %}
