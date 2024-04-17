@@ -29,6 +29,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show')]
+    #[IsGranted('show', 'article')]
     public function show(RouterInterface $router, Article $article = null)
     {
         $comment = new Comment();
@@ -46,13 +47,14 @@ class ArticleController extends AbstractController
 
     #[Route('/edit/{id}', name: 'edit')]
     #[Route('/create', name: 'create')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('edit', 'article')]
     public function edit(Request $request, EntityManagerInterface $em, ?Article $article = null): Response
     {
         $isCreate = false;
         if (!$article) {
             $isCreate = true;
             $article = new Article();
+            $article->setUser($this->getUser());
         }
 
         $form = $this->createForm(ArticleType::class, $article);
