@@ -9,6 +9,9 @@
         <div class="card-header">
             <h2>{{  article.title }}</h2>
             <h5>{{ article.category }}</h5>
+            {% if is_granted('ROLE_ADMIN') and article.status == 'DRAFT' %}
+                <a href="{{ path('admin_articles_validate', {'id': article.id}) }}">Valider</a>
+            {% endif %}
         </div>
 
         <div class="card-body">

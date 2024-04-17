@@ -9,11 +9,13 @@ use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/articles', name: 'articles_')]
 class ArticleController extends AbstractController
@@ -44,6 +46,7 @@ class ArticleController extends AbstractController
 
     #[Route('/edit/{id}', name: 'edit')]
     #[Route('/create', name: 'create')]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, EntityManagerInterface $em, ?Article $article = null): Response
     {
         $isCreate = false;
@@ -75,6 +78,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(EntityManagerInterface $em, Article $article): RedirectResponse
     {
         $em->remove($article);

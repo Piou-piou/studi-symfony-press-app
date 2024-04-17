@@ -11,11 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/comments', name: 'comments_')]
 class CommentController extends AbstractController
 {
     #[Route('/create/{article}', name: 'create')]
+    #[IsGranted('ROLE_USER')]
     public function edit(RouterInterface $router, Request $request, EntityManagerInterface $em, Article $article): Response
     {
         $comment = new Comment();
