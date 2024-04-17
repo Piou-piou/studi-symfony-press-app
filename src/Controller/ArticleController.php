@@ -62,6 +62,7 @@ class ArticleController extends AbstractController
             /** @var Article $article */
             $article = $form->getData();
             $article->setStatus('DRAFT');
+            $article->setUser($this->getUser());
 
             $em->persist($article);
             $em->flush();
