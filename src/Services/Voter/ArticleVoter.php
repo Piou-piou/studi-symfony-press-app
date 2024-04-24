@@ -53,7 +53,7 @@ class ArticleVoter extends Voter
         return true;
     }
 
-    private function canEdit(?Article $article, User $user): bool
+    private function canEdit(?Article $article, ?User $user): bool
     {
         if (!$user instanceof User) {
             // the user must be logged in; if not, deny access
