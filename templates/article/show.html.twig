@@ -27,9 +27,11 @@
         </div>
     </article>
 
-    <a href="{{ path('comments_create', {'article': article.id}) }}" data-turbo-frame="main-modal" data-controller="modal" data-action="click->modal#open">
-        Ajouter un commentaire
-    </a>
+    {% if 'PUBLISHED' == article.status %}
+        <a href="{{ path('comments_create', {'article': article.id}) }}" data-turbo-frame="main-modal" data-controller="modal" data-action="click->modal#open">
+            Ajouter un commentaire
+        </a>
+    {% endif %}
 
     <div class="mt-3">
         <h3>Commentaires</h3>

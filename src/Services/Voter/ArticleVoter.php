@@ -12,12 +12,16 @@ class ArticleVoter extends Voter
 {
     const SHOW = 'show';
     const EDIT = 'edit';
+    const PUBLISHED = 'published';
 
     public function __construct(private readonly Security $security) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, [self::SHOW, self::EDIT])) {
+        if (!in_array($attribute, [self::SHOW, self::EDIT, self::PUBLISHED])) {
+            return false;
+        }
+        if (!$subject instanceof Article) {
             return false;
         }
 
@@ -39,6 +43,7 @@ class ArticleVoter extends Voter
         return match($attribute) {
             self::SHOW => $this->canShow($article, $user),
             self::EDIT => $this->canEdit($article, $user),
+            self::PUBLISHED => $this->isPublished($article, $user),
             default => throw new \LogicException('This code should not be reached!')
         };
     }
@@ -65,5 +70,10 @@ class ArticleVoter extends Voter
         }
 
         return $article->getUser() === $user;
+    }
+
+    private function isPublished(Article $article, User $user)
+    {
+        return 'PUBLISHED' === $article->getStatus();
     }
 }
