@@ -28,11 +28,6 @@ class ArticleVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
-            // the user must be logged in; if not, deny access
-            return false;
-        }
-
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
         }
@@ -48,14 +43,23 @@ class ArticleVoter extends Voter
         };
     }
 
-    private function canShow(Article $article, User $user): bool
+    private function canShow(Article $article, ?User $user): bool
     {
+        if ($article->getStatus() === 'DRAFT' && $article->getUser() !== $user) {
+            return false;
+        }
+
         // the Post object could have, for example, a method `isPrivate()`
-        return $article->getStatus() !== 'DRAFT' || $article->getUser() === $user;
+        return true;
     }
 
     private function canEdit(?Article $article, User $user): bool
     {
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
+        }
+
         if (!$article) {
             return true;
         }
