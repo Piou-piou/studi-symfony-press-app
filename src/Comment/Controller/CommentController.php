@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Comment\Controller;
 
+use App\Comment\Form\CommentType;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;

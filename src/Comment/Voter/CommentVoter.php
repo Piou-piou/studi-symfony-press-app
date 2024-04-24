@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Services\Voter;
+namespace App\Comment\Voter;
 
-use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;

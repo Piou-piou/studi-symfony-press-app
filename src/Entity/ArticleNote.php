@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleNoteRepository;
+use App\Article\Repository\ArticleNoteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleNoteRepository::class)]

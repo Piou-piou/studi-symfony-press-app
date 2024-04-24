@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Article\Controller;
 
+use App\Article\Form\ArticleType;
+use App\Article\Repository\ArticleRepository;
+use App\Comment\Form\CommentType;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Form\ArticleType;
-use App\Form\CommentType;
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
