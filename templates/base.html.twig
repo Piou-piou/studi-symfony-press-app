@@ -23,9 +23,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('articles_list') }}">Liste des articles</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('articles_create') }}">Créer un article</a>
-                        </li>
+
+                        {% if app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('articles_create') }}">Créer un article</a>
+                            </li>
+                        {% endif %}
+
                         <li class="nav-item">
                             {% if not app.user %}
                                 <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
