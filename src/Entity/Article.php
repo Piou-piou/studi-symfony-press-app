@@ -37,7 +37,7 @@ class Article
     #[ORM\OneToMany(targetEntity: ArticleNote::class, mappedBy: 'article', orphanRemoval: true)]
     private Collection $notes;
 
-    #[ORM\ManyToOne(inversedBy: 'Article')]
+    #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?ArticleCategory $category = null;
 
     #[ORM\ManyToOne]
