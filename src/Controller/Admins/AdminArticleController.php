@@ -15,7 +15,7 @@ class AdminArticleController extends AbstractController
     public function list(EntityManagerInterface $em, Article $article = null): RedirectResponse
     {
         $article->setStatus('PUBLISHED');
-        $em->persist($em);
+        $em->persist($article);
         $em->flush();
 
         return $this->redirectToRoute('articles_show', ['id' => $article->getId()]);
