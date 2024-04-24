@@ -42,6 +42,9 @@
                 </div>
                 <div class="card-footer">
                     Publié par {{ comment.user.username }} à {{ comment.publishedAt|date('d/m/Y H:i') }}
+                    {% if is_granted('delete', comment) %}
+                        <a href="{{ path('comments_delete', {'id': comment.id}) }}" data-turbo-frame="_top">Supprimer</a>
+                    {% endif %}
                 </div>
             </div>
         {% else %}

@@ -15,12 +15,13 @@ class CommentVoter extends Voter
     const SHOW = 'show';
     const CREATE = 'create';
     const EDIT = 'edit';
+    const DELETE = 'delete';
 
     public function __construct(private readonly Security $security) {}
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, [self::SHOW, self::CREATE, self::EDIT])) {
+        if (!in_array($attribute, [self::SHOW, self::CREATE, self::EDIT, self::DELETE])) {
             return false;
         }
         if (null === $subject) {
@@ -46,6 +47,7 @@ class CommentVoter extends Voter
         return match($attribute) {
             self::EDIT => $this->canEdit($comment, $token->getUser()),
             self::CREATE => $this->canEdit($comment, $token->getUser()),
+            self::DELETE => $this->canEdit($comment, $token->getUser()),
             default => throw new \LogicException('This code should not be reached!')
         };
     }

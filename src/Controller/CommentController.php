@@ -8,6 +8,7 @@ use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -51,5 +52,17 @@ class CommentController extends AbstractController
         return $this->render('comment/edit.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    #[IsGranted('delete', 'comment')]
+    public function delete(EntityManagerInterface $em, Comment $comment): RedirectResponse
+    {
+        $articleId = $comment->getArticle()->getId();
+
+        $em->remove($comment);
+        $em->flush();
+
+        return $this->redirectToRoute('articles_show', ['id' => $articleId]);
     }
 }
