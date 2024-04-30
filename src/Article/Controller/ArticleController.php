@@ -32,10 +32,7 @@ class ArticleController extends AbstractController
     #[IsGranted('show', 'article')]
     public function show(RouterInterface $router, Article $article = null)
     {
-        $comment = new Comment();
-        $comment->setArticle($article);
-
-        $form = $this->createForm(CommentType::class, $comment, [
+        $form = $this->createForm(CommentType::class, (new Comment())->setArticle($article), [
             'action' => $router->generate('comments_create', ['article' => $article->getId()])
         ]);
 
