@@ -27,7 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findByUser(User $user): array
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            $resutl =  $this->findAll();
+            return $this->findAll();
         }
 
         return $this->createQueryBuilder('a')
