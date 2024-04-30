@@ -70,7 +70,7 @@ class ArticleVoter extends Voter
             return true;
         }
 
-        return $article->getUser() === $user;
+        return $article->getUser() === $user && ArticleStatus::DRAFT === $article->getStatus();
     }
 
     private function isPublished(Article $article, User $user)
