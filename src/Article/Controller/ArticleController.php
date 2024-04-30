@@ -10,7 +10,6 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,16 +21,10 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class ArticleController extends AbstractController
 {
     #[Route('/', name: 'list')]
-    public function list(Security $security, ArticleRepository $articleRepository): Response
+    public function list(ArticleRepository $articleRepository): Response
     {
-        if ($security->isGranted('ROLE_ADMIN', $this->getUser())) {
-            $articles = $articleRepository->findAll();
-        } else {
-            $articles = $articleRepository->findBy(['status' => ArticleStatus::PUBLISHED]);
-        }
-
         return $this->render('article/list.html.twig', [
-            'articles' => $articles,
+            'articles' => $articleRepository->findByUser($this->getUser()),
         ]);
     }
 
