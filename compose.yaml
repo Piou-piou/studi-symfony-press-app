@@ -3,7 +3,6 @@ version: "3.8"
 services:
   www:
     build: docker/php
-    container_name: studi_symfony_php
     ports:
       - 8741:80
     volumes:
@@ -14,7 +13,6 @@ services:
 
   mysql:
     image: mysql
-    container_name: studi_symfony_mysql
     volumes:
       - ./var/db_data:/var/lib/mysql
     environment:
@@ -24,7 +22,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: studi_symfony_phpmyadmin
     depends_on:
       - mysql
     ports:
