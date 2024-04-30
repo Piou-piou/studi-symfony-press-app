@@ -27,7 +27,7 @@
         </div>
     </article>
 
-    {% if 'PUBLISHED' == article.status %}
+    {% if 'PUBLISHED' == article.status and app.user %}
         <a href="{{ path('comments_create', {'article': article.id}) }}" data-turbo-frame="main-modal" data-controller="modal" data-action="click->modal#open">
             Ajouter un commentaire
         </a>
