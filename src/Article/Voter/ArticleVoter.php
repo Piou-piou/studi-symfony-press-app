@@ -75,6 +75,6 @@ class ArticleVoter extends Voter
 
     private function isPublished(Article $article, User $user)
     {
-        return 'PUBLISHED' === $article->getStatus();
+        return ArticleStatus::PUBLISHED === $article->getStatus();
     }
 }

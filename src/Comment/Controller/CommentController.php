@@ -2,6 +2,7 @@
 
 namespace App\Comment\Controller;
 
+use App\Article\Constant\ArticleStatus;
 use App\Comment\Form\CommentType;
 use App\Entity\Article;
 use App\Entity\Comment;
@@ -23,7 +24,7 @@ class CommentController extends AbstractController
     #[IsGranted('published', 'article')]
     public function edit(RouterInterface $router, Request $request, EntityManagerInterface $em, Article $article, ?Comment $comment = null): Response
     {
-        if ('PUBLISHED' !== $article->getStatus()) {
+        if (ArticleStatus::PUBLISHED !== $article->getStatus()) {
             throw new AccessDeniedException('Article non publié');
         }
 
