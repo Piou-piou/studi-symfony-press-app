@@ -56,12 +56,8 @@ class ArticleController extends AbstractController
     #[IsGranted('edit', 'article')]
     public function edit(Request $request, EntityManagerInterface $em, ?Article $article = null): Response
     {
-        $isCreate = false;
-        if (!$article) {
-            $isCreate = true;
-            $article = new Article();
-            $article->setUser($this->getUser());
-        }
+        $isCreate = !$article;
+        $article = $article ?? new Article();
 
         $form = $this->createForm(ArticleType::class, $article);
 
@@ -69,9 +65,6 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Article $article */
             $article = $form->getData();
-            $article->setStatus('DRAFT');
-            $article->setUser($this->getUser());
-
             $em->persist($article);
             $em->flush();
 
