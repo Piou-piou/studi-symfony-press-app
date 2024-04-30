@@ -9,7 +9,7 @@
         <div class="card-header">
             <h2>{{  article.title }}</h2>
             <h5>{{ article.category }}</h5>
-            {% if is_granted('ROLE_ADMIN') and article.status == 'DRAFT' %}
+            {% if is_granted('ROLE_ADMIN') and article.status == article_draft %}
                 <a href="{{ path('admin_articles_validate', {'id': article.id}) }}">Valider</a>
             {% endif %}
         </div>
@@ -22,12 +22,12 @@
             {% if article.publishedAt %}
                 <p>Article publié le {{ article.publishedAt }}</p>
             {% else %}
-                <p>{{ article.status }}</p>
+                <p>{{ article.status | trans }}</p>
             {% endif %}
         </div>
     </article>
 
-    {% if 'PUBLISHED' == article.status and app.user %}
+    {% if article_published == article.status and app.user %}
         <a href="{{ path('comments_create', {'article': article.id}) }}" data-turbo-frame="main-modal" data-controller="modal" data-action="click->modal#open">
             Ajouter un commentaire
         </a>

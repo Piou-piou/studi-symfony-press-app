@@ -2,6 +2,7 @@
 
 namespace App\Article\EventSubscriber\Doctrine;
 
+use App\Article\Constant\ArticleStatus;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
@@ -17,7 +18,7 @@ class DoctrineArticleSubscriber
 
     public function prePersist(Article $article, PrePersistEventArgs $args): void
     {
-        $article->setStatus('DRAFT');
+        $article->setStatus(ArticleStatus::DRAFT);
         $article->setUser($this->security->getUser());
     }
 }

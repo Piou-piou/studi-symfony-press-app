@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Article\Constant\ArticleStatus;
 use App\Article\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,7 +30,7 @@ class Article
     private ?\DateTimeImmutable $published_at = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?ArticleStatus $status = null;
 
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'article')]
     private Collection $comments;
@@ -108,12 +109,12 @@ class Article
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?ArticleStatus
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(ArticleStatus $status): static
     {
         $this->status = $status;
 

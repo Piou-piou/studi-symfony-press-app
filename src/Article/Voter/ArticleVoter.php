@@ -2,6 +2,7 @@
 
 namespace App\Article\Voter;
 
+use App\Article\Constant\ArticleStatus;
 use App\Entity\Article;
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -50,7 +51,7 @@ class ArticleVoter extends Voter
 
     private function canShow(Article $article, ?User $user): bool
     {
-        if ($article->getStatus() === 'DRAFT' && $article->getUser() !== $user) {
+        if ($article->getStatus() === ArticleStatus::DRAFT && $article->getUser() !== $user) {
             return false;
         }
 

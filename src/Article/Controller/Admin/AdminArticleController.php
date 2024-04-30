@@ -2,6 +2,7 @@
 
 namespace App\Article\Controller\Admin;
 
+use App\Article\Constant\ArticleStatus;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ class AdminArticleController extends AbstractController
     #[Route('/validate/{id}', name: 'validate')]
     public function list(EntityManagerInterface $em, Article $article = null): RedirectResponse
     {
-        $article->setStatus('PUBLISHED');
+        $article->setStatus(ArticleStatus::PUBLISHED);
         $em->persist($article);
         $em->flush();
 

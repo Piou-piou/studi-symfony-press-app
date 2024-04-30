@@ -2,6 +2,7 @@
 
 namespace App\Article\Controller;
 
+use App\Article\Constant\ArticleStatus;
 use App\Article\Form\ArticleType;
 use App\Article\Repository\ArticleRepository;
 use App\Comment\Form\CommentType;
@@ -26,7 +27,7 @@ class ArticleController extends AbstractController
         if ($security->isGranted('ROLE_ADMIN', $this->getUser())) {
             $articles = $articleRepository->findAll();
         } else {
-            $articles = $articleRepository->findBy(['status' => 'PUBLISHED']);
+            $articles = $articleRepository->findBy(['status' => ArticleStatus::PUBLISHED]);
         }
 
         return $this->render('article/list.html.twig', [
@@ -48,6 +49,8 @@ class ArticleController extends AbstractController
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'form' => $form,
+            'article_draft' => ArticleStatus::DRAFT,
+            'article_published' => ArticleStatus::PUBLISHED
         ]);
     }
 
